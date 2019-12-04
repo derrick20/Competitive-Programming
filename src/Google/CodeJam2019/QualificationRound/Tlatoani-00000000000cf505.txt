@@ -1,0 +1,50 @@
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int t = scanner.nextInt();
+        for (int i = 1; i <= t; i++) {
+            scanner.nextInt();
+            int l = scanner.nextInt();
+            int[] encrypted = new int[l];
+            encrypted[0] = scanner.nextInt();
+            for (int j = 1; j < l; j++) {
+                encrypted[j] = scanner.nextInt();
+            }
+            int[] decrypted = new int[l + 1];
+            int j;
+            for (j = 1; encrypted[j - 1] == encrypted[j]; j++);
+            decrypted[j] = gcd(encrypted[j - 1], encrypted[j]);
+            for (int k = j; k > 0; k--) {
+                decrypted[k - 1] = encrypted[k - 1] / decrypted[k];
+            }
+            for (int k = j; k < l; k++) {
+                decrypted[k + 1] = encrypted[k] / decrypted[k];
+            }
+            TreeSet<Integer> primes = new TreeSet<>();
+            for (int prime : decrypted) {
+                primes.add(prime);
+            }
+            Map<Integer, Character> alphabet = new HashMap<>();
+            char letter = 'A';
+            for (int prime : primes) {
+                alphabet.put(prime, letter++);
+            }
+            System.out.print("Case #" + i + ": ");
+            for (int prime : decrypted) {
+                System.out.print(alphabet.get(prime));
+            }
+            System.out.println();
+        }
+    }
+
+    static int gcd(int a, int b) {
+        if (b == 0) {
+            return a;
+        } else {
+            return gcd(b, a % b);
+        }
+    }
+}

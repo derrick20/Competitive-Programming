@@ -1,0 +1,13 @@
+/*
+ID: d3rrickl
+LANG: JAVA
+PROG: palsquare
+ */
+import java.io.*;
+import java.util.*;
+public class palsquare
+{
+   public static void main(String[] args) throws Exception
+   {
+      BufferedReader br = new BufferedReader(new FileReader("palsquare.in"));
+      PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("palsquare.out")));
